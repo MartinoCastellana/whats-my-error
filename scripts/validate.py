@@ -23,13 +23,19 @@ def validate():
     skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     if not skill.startswith("---\nname: whatsmyerror\n"):
         errors.append("Canonical SKILL.md frontmatter is missing or invalid")
-    for phrase in ("read-only", "explicit approval", "coverage", "contracts", "Retry-After", "untrusted"):
+    for phrase in ("read-only", "coverage", "untrusted", "do not edit", "technician", "admin", "user-facing"):
         if phrase.lower() not in skill.lower():
             errors.append(f"SKILL.md omits core concept: {phrase}")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for path in re.findall(r"\[[^]]+\]\(([^)#]+)(?:#[^)]*)?\)", readme):
         if "://" not in path and not (ROOT / path).exists():
             errors.append(f"README link target does not exist: {path}")
+    log_schema = ROOT / "schemas/error-log.schema.json"
+    if log_schema.exists():
+        schema_doc = json.loads(log_schema.read_text(encoding="utf-8"))
+        log_fields = set(schema_doc.get("required", []))
+        if not {"logged_at", "error_id", "layer", "local_codes", "redaction"} <= log_fields:
+            errors.append("Central error-log schema is missing required continuity/privacy fields")
     if (ROOT / "src").exists() or (ROOT / "pyproject.toml").exists():
         errors.append("Skill-only release must not ship the abandoned CLI prototype")
     if errors:
