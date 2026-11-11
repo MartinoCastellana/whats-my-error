@@ -1,0 +1,8 @@
+{
+  "locale": "it",
+  "errors": {
+    "unexpected": {"USER": "Si è verificato un problema. Riprova più tardi.", "SUPPORT": "Registra il codice errore e il correlation ID; segnala se il problema persiste.", "TECHNICIAN": "Verifica la telemetria redatta, lo stato delle dipendenze e i tempi della richiesta.", "SUPERVISOR": "Valuta il numero di utenti coinvolti e le soglie di escalation.", "ADMIN": "Usa il runbook operativo autorizzato."},
+    "rate_limited": {"USER": "Hai effettuato troppe richieste. Riprova più tardi.", "SUPPORT": "Verifica il codice errore e l'intervallo di ripetizione.", "TECHNICIAN": "Verifica la quota e Retry-After; ripeti solo operazioni idempotenti con limiti.", "SUPERVISOR": "Valuta la durata del rate limiting e l'impatto sui clienti.", "ADMIN": "Verifica la configurazione di rate limit e capacità autorizzata."},
+    "unavailable": {"USER": "Il servizio è temporaneamente non disponibile. Riprova tra poco.", "SUPPORT": "Includi il correlation ID nella segnalazione del problema alla dipendenza.", "TECHNICIAN": "Verifica la dipendenza, il budget dei timeout e Retry-After.", "SUPERVISOR": "Valuta l'impatto sul servizio e le soglie di escalation.", "ADMIN": "Usa il runbook protetto della dipendenza."}
+  }
+}

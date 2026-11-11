@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/whatsmyerror/registry.schema.json",
+  "title": "WhatsMyError versioned error registry",
+  "type": "object",
+  "required": ["version", "locale", "errors"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 1},
+    "locale": {"type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$"},
+    "errors": {"type": "array", "items": {"$ref": "finding.schema.json"}}
+  },
+  "additionalProperties": false
+}

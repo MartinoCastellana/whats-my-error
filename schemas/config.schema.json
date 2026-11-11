@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/whatsmyerror/config.schema.json",
+  "title": "WhatsMyError analysis preferences",
+  "type": "object",
+  "properties": {
+    "version": {"const": 1},
+    "project": {"type": "object", "properties": {"name": {"type": "string"}, "mode": {"enum": ["audit", "plan"]}}, "additionalProperties": false},
+    "scan": {"type": "object", "properties": {"offline": {"const": true}, "follow_symlinks": {"const": false}, "exclude": {"type": "array", "items": {"type": "string"}}, "max_files": {"type": "integer", "minimum": 1}, "max_size": {"type": "integer", "minimum": 1}}, "additionalProperties": false},
+    "classification": {"type": "object", "properties": {"default_locale": {"type": "string"}, "fallback_locale": {"type": "string"}, "audiences": {"type": "array", "items": {"enum": ["USER", "SUPPORT", "TECHNICIAN", "SUPERVISOR", "ADMIN"]}}}, "additionalProperties": false},
+    "privacy": {"type": "object", "properties": {"redact_secrets": {"const": true}, "redact_personal_data": {"const": true}, "source_upload": {"const": false}}, "additionalProperties": false},
+    "refactor": {"type": "object", "properties": {"mode": {"enum": ["propose", "apply"]}, "preserve_public_contracts": {"const": true}, "require_approval": {"const": true}, "require_clean_worktree": {"const": true}}, "additionalProperties": false},
+    "retry": {"type": "object", "properties": {"default_enabled": {"const": false}, "max_attempts": {"type": "integer", "minimum": 0, "maximum": 10}, "exponential_backoff": {"type": "boolean"}, "jitter": {"type": "boolean"}, "respect_retry_after": {"type": "boolean"}}, "additionalProperties": false},
+    "reports": {"type": "object", "properties": {"output_dir": {"type": "string"}, "formats": {"type": "array", "items": {"enum": ["json", "sarif", "md", "html"]}}}, "additionalProperties": false}
+  },
+  "required": ["version"],
+  "additionalProperties": false
+}

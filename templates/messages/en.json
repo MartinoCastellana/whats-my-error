@@ -1,0 +1,8 @@
+{
+  "locale": "en",
+  "errors": {
+    "unexpected": {"USER": "Something went wrong. Please try again later.", "SUPPORT": "Record the error code and correlation ID; escalate if the issue persists.", "TECHNICIAN": "Inspect redacted service telemetry, dependency health, and request timing.", "SUPERVISOR": "Review the affected-user count and incident thresholds.", "ADMIN": "Use the authorized operational runbook."},
+    "rate_limited": {"USER": "Too many requests. Please try again later.", "SUPPORT": "Check the error code and retry window.", "TECHNICIAN": "Inspect quota scope and Retry-After; use bounded retries only for idempotent operations.", "SUPERVISOR": "Assess sustained rate limiting and customer impact.", "ADMIN": "Review approved rate-limit and capacity configuration."},
+    "unavailable": {"USER": "The service is temporarily unavailable. Please try again shortly.", "SUPPORT": "Include the correlation ID when escalating this dependency failure.", "TECHNICIAN": "Inspect dependency health, timeout budget, and Retry-After.", "SUPERVISOR": "Review service impact and escalation thresholds.", "ADMIN": "Use the protected dependency runbook."}
+  }
+}
