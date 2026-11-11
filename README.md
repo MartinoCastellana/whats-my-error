@@ -12,6 +12,8 @@ HTTP/API, GraphQL, auth, networking, databases, files, queues, workers, WebSocke
 
 It guides read-only audits and honest coverage notes. A text match is not proof of a runtime defect; the skill does not claim universal AST or data-flow analysis. When a function has many detailed error codes, group codes with the same user action into a small set of plain-language messages. Retain every original code and its source evidence in the technical map.
 
+The skill also traces errors across files and language boundaries (for example, Dart → API → PHP), maps local codes to one stable canonical error ID, and can consolidate timestamped UTC error records into a centralized analysis report when artifact writing is authorized. It does not add runtime log statements or modify functions. See the [cross-file logging model](docs/cross-files-error.md).
+
 ## Workflow
 
 ```mermaid
@@ -70,7 +72,9 @@ Copy the matching shim into the target repository: `.claude/skills/whatsmyerror/
    messages; retain the detailed code-to-group mapping for technical users.
 4. Index existing roles (`isUser`, `isOperator`, `isAdmin`, policies and guards)
    and map which errors/groups are visible to each, with source evidence.
-5. Report coverage limits. Do not edit functions/files or execute commands.
+5. Trace errors across files/languages; map local codes to one canonical ID and
+   produce timestamped UTC analysis-log entries if report output is allowed.
+6. Report coverage limits. Do not edit functions/files or execute commands.
 ```
 
 ## Example: multiple views of one 503

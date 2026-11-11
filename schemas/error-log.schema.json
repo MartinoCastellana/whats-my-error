@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/whatsmyerror/error-log.schema.json",
+  "title": "WhatsMyError centralized analysis log record",
+  "description": "A sanitized analysis artifact, not an application runtime log.",
+  "type": "object",
+  "required": ["logged_at", "error_id", "category", "severity", "outcome", "service", "layer", "operation", "source", "local_codes", "audiences", "redaction", "evidence", "confidence"],
+  "properties": {
+    "logged_at": {"type": "string", "format": "date-time", "pattern": "Z$", "description": "UTC timestamp when this analysis record was written."},
+    "event_time": {"type": ["string", "null"], "format": "date-time", "description": "Original event time only when present in inspected evidence; never infer it."},
+    "error_id": {"type": "string", "pattern": "^WME-[A-Z0-9_-]+$", "description": "Canonical cross-file ID for the same underlying error."},
+    "category": {"enum": ["NETWORK", "HTTP_CLIENT", "HTTP_SERVER", "AUTH", "VALIDATION", "RATE_LIMIT", "TIMEOUT", "DATABASE", "FILESYSTEM", "DEPENDENCY", "QUEUE", "RESOURCE", "CONFIG", "BUSINESS", "SECURITY", "UNKNOWN"]},
+    "severity": {"enum": ["INFO", "WARNING", "ERROR", "CRITICAL"]},
+    "outcome": {"enum": ["SUCCESS", "EXPECTED_FAILURE", "TRANSIENT_FAILURE", "PERMANENT_FAILURE", "UNKNOWN"]},
+    "service": {"type": ["string", "null"]},
+    "layer": {"type": "string", "description": "Observed layer such as mobile_client, api_gateway, or backend."},
+    "operation": {"type": ["string", "null"]},
+    "source": {"type": "object", "required": ["path"], "properties": {"path": {"type": "string"}, "line": {"type": ["integer", "null"], "minimum": 1}}, "additionalProperties": false},
+    "local_codes": {"type": "array", "items": {"type": "object", "required": ["code", "mapping_confidence"], "properties": {"code": {"type": "string"}, "mapping_confidence": {"enum": ["low", "medium", "high"]}, "evidence": {"type": ["string", "null"]}}, "additionalProperties": false}},
+    "correlation_id": {"type": ["string", "null"]},
+    "trace_id": {"type": ["string", "null"]},
+    "http_status": {"type": ["integer", "null"], "minimum": 100, "maximum": 599},
+    "user_group": {"type": ["string", "null"]},
+    "audiences": {"type": "array", "uniqueItems": true, "items": {"enum": ["USER", "SUPPORT", "TECHNICIAN", "SUPERVISOR", "ADMIN"]}},
+    "roles": {"type": "array", "items": {"type": "string"}},
+    "redaction": {"type": "object", "required": ["applied", "omitted_fields"], "properties": {"applied": {"type": "boolean"}, "omitted_fields": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "confidence": {"enum": ["low", "medium", "high"]}
+  },
+  "additionalProperties": false
+}
