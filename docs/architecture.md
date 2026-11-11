@@ -2,7 +2,7 @@
 
 ## Product boundary
 
-WhatsMyError is a **coding-agent skill**. The canonical interface is `SKILL.md`, with `AGENTS.md` and product instruction shims for hosts that do not load the canonical format. The host agent reads the target repository and performs the audit. There is no scanner engine, CLI, service, or mandatory runtime dependency in this release.
+WhatsMyError is a **read-only coding-agent skill**. Its deliverable is an error map; it never modifies functions or application behavior. The canonical interface is `SKILL.md`, with `AGENTS.md` and product instruction shims for hosts that do not load the canonical format. The host agent reads the target repository and performs the audit. There is no scanner engine, CLI, service, or mandatory runtime dependency in this release.
 
 ## Intended analysis flow
 

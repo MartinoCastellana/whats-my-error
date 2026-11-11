@@ -37,6 +37,14 @@
 
 Audience views are projections of one event, not mutually exclusive categories. User messages stay concise and safe. Support messages include stable codes and correlation references. Technical views contain only authorized, redacted diagnostic context. Supervisors see impact and escalation state. Administrators receive operational details through a protected channel. The application enforces RBAC; a request parameter cannot grant a privileged view.
 
+## User-facing code groups
+
+When one function has many detailed codes, group them only when the same user message and action apply. Keep a complete mapping from each original code and source location to the user-facing group. For example, several field-level validation codes may map to `INPUT_INVALID`; expired and missing credentials may map to `SESSION_REQUIRED`; upstream timeout and outage codes may map to `SERVICE_TEMPORARY` if the user action is the same. Preserve distinct groups when actions differ. Grouping changes presentation only: it must not alter application functions or behavior, and it must not hide detailed codes from authorized technical/support views.
+
+## Role index
+
+Inspect actual role declarations and enforcement: role enums/constants, `isUser`/`isOperator`/`isAdmin`-style predicates, `hasRole` checks, middleware, decorators, route guards, policies, and protected UI/API paths. Produce a role-to-error index mapping each observed role to detailed codes and user-facing groups that can reach it, citing source locations and confidence. Keep role names and hierarchy as implemented. A symbol's name alone is not proof of authorization; when enforcement cannot be traced, mark visibility unknown for review. Do not assume an administrator can see every error or expose privileged details in a user view.
+
 ## Retry rule
 
 Retry only when the failure is transient **and** the operation is idempotent or protected by a valid idempotency key. Bound attempts, use exponential backoff with jitter, honor `Retry-After`, and account for cancellation/deadlines. A status code by itself is not sufficient evidence to retry.
